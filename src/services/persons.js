@@ -1,12 +1,11 @@
 import axios from "axios";
 
 const baseUrl = import.meta.env.PROD
-  ? "https://puhelinluettelo-backend.onrender.com/api/persons"
+  ? "https://puhelinluettelo-backend-je1y.onrender.com/api/persons"
   : "http://localhost:3001/api/persons";
 
 const getAll = () => {
   const request = axios.get(baseUrl);
-
   return request.then((response) => response.data);
 };
 
