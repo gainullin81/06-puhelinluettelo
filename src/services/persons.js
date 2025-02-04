@@ -1,5 +1,9 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3001/api/persons";
+
+// Используйте разные базовые URL для разработки и production
+const baseUrl = import.meta.env.PROD
+  ? "https://your-backend-url.com/api/persons"
+  : "http://localhost:3001/api/persons";
 
 const getAll = () => {
   const request = axios.get(baseUrl);
