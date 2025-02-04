@@ -14,9 +14,18 @@ const create = (newPerson) => {
   return request.then((response) => response.data);
 };
 
-const removePerson = (id) => {
-  const request = axios.delete(`${baseUrl}/${id}`);
-  return request.then((response) => response.data);
+const remove = (id) => {
+  console.log("Attempting to delete id:", id);
+  return axios
+    .delete(`${baseUrl}/${id}`)
+    .then((response) => {
+      console.log("Delete response:", response);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Delete error:", error);
+      throw error;
+    });
 };
 
 const changePersonNumber = (id, newObject) => {
@@ -27,6 +36,6 @@ const changePersonNumber = (id, newObject) => {
 export default {
   getAll,
   create,
-  removePerson,
+  remove,
   changePersonNumber,
 };

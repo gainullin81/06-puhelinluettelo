@@ -108,14 +108,13 @@ function App() {
     }
 
     personService
-      .removePerson(id)
+      .remove(id)
       .then(() => {
-        const filteredPersons = persons.filter((person) => person.id !== id);
-        setPersons(filteredPersons);
+        setPersons(persons.filter((person) => person.id !== id));
         handleNotifications(`Deleted ${name}`, "success");
       })
       .catch((error) => {
-        console.log(error);
+        console.error("Error in handleDelete:", error);
         handleNotifications(`Error deleting ${name}`, "error");
       });
   };
