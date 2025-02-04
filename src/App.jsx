@@ -46,6 +46,7 @@ function App() {
   };
 
   const addNewPerson = () => {
+    // Убрали параметр event
     if (persons.some((person) => person.name === newName)) {
       const person = persons.find((person) => person.name === newName);
       const result = window.confirm(
@@ -64,6 +65,7 @@ function App() {
                 pers.id !== returnedPerson.id ? pers : returnedPerson
               )
             );
+            handleNotifications(`Updated ${person.name}'s number`, "success");
           })
           .catch((error) => {
             console.log("Error", error);
@@ -80,13 +82,21 @@ function App() {
         name: newName,
         number: newNumber,
       };
-      personService.create(personObject).then((returnedPerson) => {
-        setPersons(persons.concat(returnedPerson));
-        setNewName("");
-        setNewNumber("");
-        const message = `Added ${newName}`;
-        handleNotifications(message, "success");
-      });
+      personService
+        .create(personObject)
+        .then((returnedPerson) => {
+          setPersons(persons.concat(returnedPerson));
+          setNewName("");
+          setNewNumber("");
+          handleNotifications(`Added ${newName}`, "success");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          handleNotifications(
+            `Error adding person: ${error.response?.data?.error || error.message}`,
+            "error"
+          );
+        });
     }
   };
 
@@ -99,11 +109,10 @@ function App() {
 
     personService
       .removePerson(id)
-      .then((response) => {
+      .then(() => {
         const filteredPersons = persons.filter((person) => person.id !== id);
         setPersons(filteredPersons);
-        const message = `Deleted ${response.name}`;
-        handleNotifications(message, "success");
+        handleNotifications(`Deleted ${name}`, "success");
       })
       .catch((error) => {
         console.log(error);

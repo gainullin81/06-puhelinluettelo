@@ -9,7 +9,7 @@ const PersonForm = ({
 }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    addNewPerson(event);
+    addNewPerson(); // Убрали передачу event
   };
 
   return (
@@ -37,7 +37,6 @@ const PersonForm = ({
   );
 };
 
-// Добавим PropTypes
 PersonForm.propTypes = {
   newName: PropTypes.string.isRequired,
   newNumber: PropTypes.string.isRequired,
