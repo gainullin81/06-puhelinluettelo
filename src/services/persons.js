@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Используйте разные базовые URL для разработки и production
 const baseUrl = import.meta.env.PROD
-  ? "https://your-backend-url.com/api/persons"
+  ? "https://puhelinluettelo-backend.onrender.com/api/persons"
   : "http://localhost:3001/api/persons";
 
 const getAll = () => {
