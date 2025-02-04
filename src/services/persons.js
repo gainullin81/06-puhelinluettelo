@@ -15,17 +15,9 @@ const create = (newPerson) => {
 };
 
 const remove = (id) => {
-  console.log("Attempting to delete id:", id);
-  return axios
-    .delete(`${baseUrl}/${id}`)
-    .then((response) => {
-      console.log("Delete response:", response);
-      return response.data;
-    })
-    .catch((error) => {
-      console.error("Delete error:", error);
-      throw error;
-    });
+  // Изменили имя с removePerson на remove
+  const request = axios.delete(`${baseUrl}/${id}`);
+  return request.then((response) => response.data);
 };
 
 const changePersonNumber = (id, newObject) => {
